@@ -56,7 +56,7 @@ extension Collection {
 }
 
 struct AccountView: View {
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: ApplicationRouter
     
     var body: some View {
         VStack(spacing: 0) {
@@ -73,7 +73,7 @@ struct AccountView: View {
 }
 
 struct ProfileView: View {
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: ApplicationRouter
     
     var body: some View {
         VStack(spacing: 0) {
@@ -90,7 +90,7 @@ struct ProfileView: View {
 }
 
 struct TerminatedCardsView: View {
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: ApplicationRouter
     
     var body: some View {
         VStack(spacing: 0) {
@@ -107,7 +107,7 @@ struct TerminatedCardsView: View {
 }
 
 struct TerminatedCardDetailsView: View {
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: ApplicationRouter
     
     let card: Card
     
@@ -126,7 +126,7 @@ struct TerminatedCardDetailsView: View {
 }
 
 struct HomeView: View {
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: ApplicationRouter
     
     let session: Session
     
@@ -185,7 +185,7 @@ extension UINavigationController: UIGestureRecognizerDelegate {
 }
 
 struct TransactionDetailsView: View {
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: ApplicationRouter
     
     let transaction: CardTransaction
     

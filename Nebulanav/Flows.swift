@@ -1,6 +1,6 @@
 import SwiftUI
 
-func presentations(router: Router) -> some View {
+func presentations(router: ApplicationRouter) -> some View {
     BetterSheetHost(router: router, presentation: \.presentation, publisher: \.$presentation, onDismiss: { current in
         print("onDismiss: \(current.id)")
     }) { sheet in
@@ -30,21 +30,26 @@ func presentations(router: Router) -> some View {
 }
 
 struct ApplicationFlow: View {
-    @StateObject var router = Router()
+    @StateObject var router = ApplicationRouter()
+    
+    @State var pendingAction: (() -> Void)?
     
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                NavigationView {
-                    if let session = router.session {
-                        HomeFlow(router: router, session: session, signOut: { router.signOut() })
-                            .background(Color.gray.ignoresSafeArea())
-                    } else {
+        VStack(spacing: 0) {
+            NavigationView {
+                RoutesView(routes: router) { screen in
+                    switch screen {
+                    case .login:
                         StartView(signIn: { router.presentation = .sheet(.login) })
+                            .background(Color.gray.ignoresSafeArea())
+                    case .home(let session):
+                        HomeView(session: session, signOut: { router.signOut() })
                             .background(Color.white.ignoresSafeArea())
                     }
+                } detail: { detail in
+                    LevelOneRoutes(routes: detail)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .environmentObject(router)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
@@ -53,24 +58,61 @@ struct ApplicationFlow: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onOpenURL { url in
             print("onOpenURL \(url)")
+            openURL(url)
+        }
+        .onReceive(router.$screen) { screen in
+            if case .home(_) = screen {
+                pendingAction?()
+                pendingAction = nil
+            }
         }
     }
-}
-
-struct HomeFlow: View {
-    @ObservedObject var router: Router
     
-    let session: Session
-    
-    let signOut: () -> Void
-    
-    var body: some View {
-        RoutesView(routes: router) { screen in
-            HomeView(session: session, signOut: signOut)
-        } detail: { detail in
-            LevelOneRoutes(routes: detail)
+    private func openURL(_ url: URL) {
+        print("Path Components: \(url.pathComponents)")
+        
+        switch url.pathComponents[safe: 1] {
+        case "cards":
+            whenSignedIn { [router] in
+                if let cardId = url.pathComponents[safe: 2] {
+                    router.navigate(to: .cardDetails(Card(id: cardId, number: "number-\(cardId)")))
+                } else {
+                    router.navigate(to: nil)
+                }
+            }
+        case "account":
+            whenSignedIn { [router] in
+                switch url.pathComponents[safe: 2] {
+                case "profile":
+                    router.navigate(to: .contact)
+                default:
+                    router.navigate(to: .account)
+                }
+            }
+        case "request-card":
+            whenSignedIn(presents: true) { [router] in
+                router.presentation = .sheet(
+                    .requestCard {
+                        router.presentation = nil
+                        print("Card Requested (from URL)")
+                    }
+                )
+            }
+        case "login":
+            router.signIn(session: Session(accessToken: "access-token", refreshToken: "refresh-token"))
+        default:
+            break
         }
-        .environmentObject(router)
+    }
+    
+    private func whenSignedIn(presents: Bool = false, perform action: @escaping () -> Void) {
+        if case .home = router.screen {
+            action()
+        } else {
+            pendingAction = presents ? {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(550), execute: action)
+            } : action
+        }
     }
 }
 

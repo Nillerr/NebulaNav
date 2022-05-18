@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct RoutesView<Routes: LevelRouter, Content: View, Detail: View>: View {
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: ApplicationRouter
     
     @ObservedObject var routes: Routes
     
@@ -23,7 +23,7 @@ struct RoutesView<Routes: LevelRouter, Content: View, Detail: View>: View {
 }
 
 struct LevelOneRoutes: View {
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: ApplicationRouter
     
     @ObservedObject var routes: LevelOneRouter
     
@@ -44,7 +44,7 @@ struct LevelOneRoutes: View {
 }
 
 struct LevelTwoRoutes: View {
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: ApplicationRouter
     
     @ObservedObject var routes: LevelTwoRouter
     
@@ -65,7 +65,7 @@ struct LevelTwoRoutes: View {
 }
 
 struct LevelThreeRoutes: View {
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: ApplicationRouter
     
     @ObservedObject var routes: LevelThreeRouter
     
@@ -82,7 +82,7 @@ struct LevelThreeRoutes: View {
 }
 
 struct LevelFourRoutes: View {
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: ApplicationRouter
     
     @ObservedObject var routes: LevelFourRouter
     

@@ -17,7 +17,7 @@ func deferredNav<T>(detail: T, completion: @escaping (T) -> Void) {
     }
 }
 
-class Router: ObservableObject, LevelRouter {
+class ApplicationRouter: ObservableObject, LevelRouter {
     // MARK: Sheets
     @Published var presentation: Presentation<Sheet>? {
         didSet {
@@ -26,26 +26,22 @@ class Router: ObservableObject, LevelRouter {
     }
     
     // MARK: Navigation
-    @Published var session: Session? {
-        didSet {
-            if session == nil {
-                navigate(to: nil)
-            }
-        }
-    }
-    
-    var screen: String { "" }
-    
+    @Published var screen: Screen = .login
     @Published var detail: LevelOneRouter?
     
+    enum Screen {
+        case login
+        case home(Session)
+    }
+    
     func signOut() {
-        session = nil
+        screen = .login
         presentation = nil
         detail = nil
     }
     
     func signIn(session: Session) {
-        self.session = session
+        self.screen = .home(session)
         self.presentation = nil
     }
     
@@ -399,7 +395,7 @@ struct BetterSheetHost<Router, Sheet, Destination: View>: View {
     }
 }
 
-extension Router {
+extension ApplicationRouter {
     func process(output: LoginView.Output) {
         switch output {
         case .session(let session):
