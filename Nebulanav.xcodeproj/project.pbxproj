@@ -55,6 +55,7 @@
 		35E4EC062834F4020065C104 /* Flows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flows.swift; sourceTree = "<group>"; };
 		35E4EC082834F41C0065C104 /* Routing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
 		35E4EC0A2834F45B0065C104 /* Sheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheets.swift; sourceTree = "<group>"; };
+		35E4EC0C283509CD0065C104 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +107,7 @@
 		3526F7DF282BB26600CAF352 /* Nebulanav */ = {
 			isa = PBXGroup;
 			children = (
+				35E4EC0C283509CD0065C104 /* Info.plist */,
 				3526F7E0282BB26600CAF352 /* NebulanavApp.swift */,
 				3526F7E2282BB26600CAF352 /* ContentView.swift */,
 				3526F7E4282BB26700CAF352 /* Assets.xcassets */,
@@ -448,6 +450,7 @@
 				DEVELOPMENT_TEAM = C4GR524K7A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Nebulanav/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -477,6 +480,7 @@
 				DEVELOPMENT_TEAM = C4GR524K7A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Nebulanav/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

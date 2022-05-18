@@ -8,6 +8,15 @@ protocol LevelRouter: ObservableObject {
     var detail: DetailRouter? { get set }
 }
 
+/**
+ This function addresses the issue of pushing several views onto a navigation stack.
+ */
+func deferredNav<T>(detail: T, completion: @escaping (T) -> Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(550)) {
+        completion(detail)
+    }
+}
+
 class Router: ObservableObject, LevelRouter {
     // MARK: Sheets
     @Published var presentation: Presentation<Sheet>? {
@@ -89,9 +98,7 @@ class Router: ObservableObject, LevelRouter {
             let detail = LevelOneRouter(screen: screen)
             self.detail = detail
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(550)) {
-                completion(detail)
-            }
+            deferredNav(detail: detail, completion: completion)
         }
     }
     
@@ -168,9 +175,7 @@ class LevelOneRouter: ObservableObject, LevelRouter {
             let detail = LevelTwoRouter(screen: screen)
             self.detail = detail
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-                completion(detail)
-            }
+            deferredNav(detail: detail, completion: completion)
         }
     }
     
@@ -232,9 +237,7 @@ class LevelTwoRouter: ObservableObject, LevelRouter {
             let detail = LevelThreeRouter(screen: screen)
             self.detail = detail
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-                completion(detail)
-            }
+            deferredNav(detail: detail, completion: completion)
         }
     }
     
@@ -284,9 +287,7 @@ class LevelThreeRouter: ObservableObject, LevelRouter {
             let detail = LevelFourRouter(screen: screen)
             self.detail = detail
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-                completion(detail)
-            }
+            deferredNav(detail: detail, completion: completion)
         }
     }
     

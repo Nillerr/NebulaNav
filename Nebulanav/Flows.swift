@@ -51,6 +51,9 @@ struct ApplicationFlow: View {
             presentations(router: router)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onOpenURL { url in
+            print("onOpenURL \(url)")
+        }
     }
 }
 
