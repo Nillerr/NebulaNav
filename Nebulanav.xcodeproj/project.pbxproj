@@ -1,0 +1,635 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3526F7E1282BB26600CAF352 /* NebulanavApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7E0282BB26600CAF352 /* NebulanavApp.swift */; };
+		3526F7E3282BB26600CAF352 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7E2282BB26600CAF352 /* ContentView.swift */; };
+		3526F7E5282BB26700CAF352 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3526F7E4282BB26700CAF352 /* Assets.xcassets */; };
+		3526F7E8282BB26700CAF352 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3526F7E7282BB26700CAF352 /* Preview Assets.xcassets */; };
+		3526F7F2282BB26700CAF352 /* NebulanavTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7F1282BB26700CAF352 /* NebulanavTests.swift */; };
+		3526F7FC282BB26700CAF352 /* NebulanavUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7FB282BB26700CAF352 /* NebulanavUITests.swift */; };
+		3526F7FE282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7FD282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift */; };
+		35E4EC01283415820065C104 /* CardlayUI in Frameworks */ = {isa = PBXBuildFile; productRef = 35E4EC00283415820065C104 /* CardlayUI */; };
+		35E4EC03283415990065C104 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC02283415990065C104 /* Views.swift */; };
+		35E4EC052834F3E30065C104 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC042834F3E30065C104 /* Navigation.swift */; };
+		35E4EC072834F4020065C104 /* Flows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC062834F4020065C104 /* Flows.swift */; };
+		35E4EC092834F41C0065C104 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC082834F41C0065C104 /* Routing.swift */; };
+		35E4EC0B2834F45B0065C104 /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC0A2834F45B0065C104 /* Sheets.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3526F7EE282BB26700CAF352 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3526F7D5282BB26600CAF352 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3526F7DC282BB26600CAF352;
+			remoteInfo = Nebulanav;
+		};
+		3526F7F8282BB26700CAF352 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3526F7D5282BB26600CAF352 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3526F7DC282BB26600CAF352;
+			remoteInfo = Nebulanav;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3526F7DD282BB26600CAF352 /* Nebulanav.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nebulanav.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3526F7E0282BB26600CAF352 /* NebulanavApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulanavApp.swift; sourceTree = "<group>"; };
+		3526F7E2282BB26600CAF352 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3526F7E4282BB26700CAF352 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3526F7E7282BB26700CAF352 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3526F7ED282BB26700CAF352 /* NebulanavTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NebulanavTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3526F7F1282BB26700CAF352 /* NebulanavTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulanavTests.swift; sourceTree = "<group>"; };
+		3526F7F7282BB26700CAF352 /* NebulanavUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NebulanavUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3526F7FB282BB26700CAF352 /* NebulanavUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulanavUITests.swift; sourceTree = "<group>"; };
+		3526F7FD282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulanavUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		35E4EC02283415990065C104 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		35E4EC042834F3E30065C104 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		35E4EC062834F4020065C104 /* Flows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flows.swift; sourceTree = "<group>"; };
+		35E4EC082834F41C0065C104 /* Routing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
+		35E4EC0A2834F45B0065C104 /* Sheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheets.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3526F7DA282BB26600CAF352 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35E4EC01283415820065C104 /* CardlayUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3526F7EA282BB26700CAF352 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3526F7F4282BB26700CAF352 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3526F7D4282BB26600CAF352 = {
+			isa = PBXGroup;
+			children = (
+				3526F7DF282BB26600CAF352 /* Nebulanav */,
+				3526F7F0282BB26700CAF352 /* NebulanavTests */,
+				3526F7FA282BB26700CAF352 /* NebulanavUITests */,
+				3526F7DE282BB26600CAF352 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3526F7DE282BB26600CAF352 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3526F7DD282BB26600CAF352 /* Nebulanav.app */,
+				3526F7ED282BB26700CAF352 /* NebulanavTests.xctest */,
+				3526F7F7282BB26700CAF352 /* NebulanavUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3526F7DF282BB26600CAF352 /* Nebulanav */ = {
+			isa = PBXGroup;
+			children = (
+				3526F7E0282BB26600CAF352 /* NebulanavApp.swift */,
+				3526F7E2282BB26600CAF352 /* ContentView.swift */,
+				3526F7E4282BB26700CAF352 /* Assets.xcassets */,
+				3526F7E6282BB26700CAF352 /* Preview Content */,
+				35E4EC02283415990065C104 /* Views.swift */,
+				35E4EC042834F3E30065C104 /* Navigation.swift */,
+				35E4EC062834F4020065C104 /* Flows.swift */,
+				35E4EC082834F41C0065C104 /* Routing.swift */,
+				35E4EC0A2834F45B0065C104 /* Sheets.swift */,
+			);
+			path = Nebulanav;
+			sourceTree = "<group>";
+		};
+		3526F7E6282BB26700CAF352 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3526F7E7282BB26700CAF352 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3526F7F0282BB26700CAF352 /* NebulanavTests */ = {
+			isa = PBXGroup;
+			children = (
+				3526F7F1282BB26700CAF352 /* NebulanavTests.swift */,
+			);
+			path = NebulanavTests;
+			sourceTree = "<group>";
+		};
+		3526F7FA282BB26700CAF352 /* NebulanavUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3526F7FB282BB26700CAF352 /* NebulanavUITests.swift */,
+				3526F7FD282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift */,
+			);
+			path = NebulanavUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3526F7DC282BB26600CAF352 /* Nebulanav */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3526F801282BB26700CAF352 /* Build configuration list for PBXNativeTarget "Nebulanav" */;
+			buildPhases = (
+				3526F7D9282BB26600CAF352 /* Sources */,
+				3526F7DA282BB26600CAF352 /* Frameworks */,
+				3526F7DB282BB26600CAF352 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Nebulanav;
+			packageProductDependencies = (
+				35E4EC00283415820065C104 /* CardlayUI */,
+			);
+			productName = Nebulanav;
+			productReference = 3526F7DD282BB26600CAF352 /* Nebulanav.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3526F7EC282BB26700CAF352 /* NebulanavTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3526F804282BB26700CAF352 /* Build configuration list for PBXNativeTarget "NebulanavTests" */;
+			buildPhases = (
+				3526F7E9282BB26700CAF352 /* Sources */,
+				3526F7EA282BB26700CAF352 /* Frameworks */,
+				3526F7EB282BB26700CAF352 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3526F7EF282BB26700CAF352 /* PBXTargetDependency */,
+			);
+			name = NebulanavTests;
+			productName = NebulanavTests;
+			productReference = 3526F7ED282BB26700CAF352 /* NebulanavTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3526F7F6282BB26700CAF352 /* NebulanavUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3526F807282BB26700CAF352 /* Build configuration list for PBXNativeTarget "NebulanavUITests" */;
+			buildPhases = (
+				3526F7F3282BB26700CAF352 /* Sources */,
+				3526F7F4282BB26700CAF352 /* Frameworks */,
+				3526F7F5282BB26700CAF352 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3526F7F9282BB26700CAF352 /* PBXTargetDependency */,
+			);
+			name = NebulanavUITests;
+			productName = NebulanavUITests;
+			productReference = 3526F7F7282BB26700CAF352 /* NebulanavUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3526F7D5282BB26600CAF352 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					3526F7DC282BB26600CAF352 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					3526F7EC282BB26700CAF352 = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 3526F7DC282BB26600CAF352;
+					};
+					3526F7F6282BB26700CAF352 = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 3526F7DC282BB26600CAF352;
+					};
+				};
+			};
+			buildConfigurationList = 3526F7D8282BB26600CAF352 /* Build configuration list for PBXProject "Nebulanav" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3526F7D4282BB26600CAF352;
+			packageReferences = (
+				35E4EBFF283415820065C104 /* XCRemoteSwiftPackageReference "ios-cardlayui" */,
+			);
+			productRefGroup = 3526F7DE282BB26600CAF352 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3526F7DC282BB26600CAF352 /* Nebulanav */,
+				3526F7EC282BB26700CAF352 /* NebulanavTests */,
+				3526F7F6282BB26700CAF352 /* NebulanavUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3526F7DB282BB26600CAF352 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3526F7E8282BB26700CAF352 /* Preview Assets.xcassets in Resources */,
+				3526F7E5282BB26700CAF352 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3526F7EB282BB26700CAF352 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3526F7F5282BB26700CAF352 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3526F7D9282BB26600CAF352 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35E4EC03283415990065C104 /* Views.swift in Sources */,
+				3526F7E3282BB26600CAF352 /* ContentView.swift in Sources */,
+				35E4EC092834F41C0065C104 /* Routing.swift in Sources */,
+				35E4EC072834F4020065C104 /* Flows.swift in Sources */,
+				3526F7E1282BB26600CAF352 /* NebulanavApp.swift in Sources */,
+				35E4EC0B2834F45B0065C104 /* Sheets.swift in Sources */,
+				35E4EC052834F3E30065C104 /* Navigation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3526F7E9282BB26700CAF352 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3526F7F2282BB26700CAF352 /* NebulanavTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3526F7F3282BB26700CAF352 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3526F7FC282BB26700CAF352 /* NebulanavUITests.swift in Sources */,
+				3526F7FE282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3526F7EF282BB26700CAF352 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3526F7DC282BB26600CAF352 /* Nebulanav */;
+			targetProxy = 3526F7EE282BB26700CAF352 /* PBXContainerItemProxy */;
+		};
+		3526F7F9282BB26700CAF352 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3526F7DC282BB26600CAF352 /* Nebulanav */;
+			targetProxy = 3526F7F8282BB26700CAF352 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3526F7FF282BB26700CAF352 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3526F800282BB26700CAF352 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3526F802282BB26700CAF352 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Nebulanav/Preview Content\"";
+				DEVELOPMENT_TEAM = C4GR524K7A;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.mockative.Nebulanav;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3526F803282BB26700CAF352 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Nebulanav/Preview Content\"";
+				DEVELOPMENT_TEAM = C4GR524K7A;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.mockative.Nebulanav;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3526F805282BB26700CAF352 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C4GR524K7A;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.mockative.NebulanavTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nebulanav.app/Nebulanav";
+			};
+			name = Debug;
+		};
+		3526F806282BB26700CAF352 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C4GR524K7A;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.mockative.NebulanavTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nebulanav.app/Nebulanav";
+			};
+			name = Release;
+		};
+		3526F808282BB26700CAF352 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C4GR524K7A;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.mockative.NebulanavUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Nebulanav;
+			};
+			name = Debug;
+		};
+		3526F809282BB26700CAF352 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C4GR524K7A;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.mockative.NebulanavUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Nebulanav;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3526F7D8282BB26600CAF352 /* Build configuration list for PBXProject "Nebulanav" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3526F7FF282BB26700CAF352 /* Debug */,
+				3526F800282BB26700CAF352 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3526F801282BB26700CAF352 /* Build configuration list for PBXNativeTarget "Nebulanav" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3526F802282BB26700CAF352 /* Debug */,
+				3526F803282BB26700CAF352 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3526F804282BB26700CAF352 /* Build configuration list for PBXNativeTarget "NebulanavTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3526F805282BB26700CAF352 /* Debug */,
+				3526F806282BB26700CAF352 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3526F807282BB26700CAF352 /* Build configuration list for PBXNativeTarget "NebulanavUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3526F808282BB26700CAF352 /* Debug */,
+				3526F809282BB26700CAF352 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		35E4EBFF283415820065C104 /* XCRemoteSwiftPackageReference "ios-cardlayui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cardlay/ios-cardlayui";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		35E4EC00283415820065C104 /* CardlayUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35E4EBFF283415820065C104 /* XCRemoteSwiftPackageReference "ios-cardlayui" */;
+			productName = CardlayUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3526F7D5282BB26600CAF352 /* Project object */;
+}
