@@ -14,6 +14,7 @@
 		3526F7F2282BB26700CAF352 /* NebulanavTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7F1282BB26700CAF352 /* NebulanavTests.swift */; };
 		3526F7FC282BB26700CAF352 /* NebulanavUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7FB282BB26700CAF352 /* NebulanavUITests.swift */; };
 		3526F7FE282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7FD282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift */; };
+		35322C8228353DE200A494C7 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35322C8128353DE200A494C7 /* Library.swift */; };
 		35E4EC01283415820065C104 /* CardlayUI in Frameworks */ = {isa = PBXBuildFile; productRef = 35E4EC00283415820065C104 /* CardlayUI */; };
 		35E4EC03283415990065C104 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC02283415990065C104 /* Views.swift */; };
 		35E4EC052834F3E30065C104 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC042834F3E30065C104 /* Navigation.swift */; };
@@ -50,6 +51,7 @@
 		3526F7F7282BB26700CAF352 /* NebulanavUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NebulanavUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3526F7FB282BB26700CAF352 /* NebulanavUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulanavUITests.swift; sourceTree = "<group>"; };
 		3526F7FD282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulanavUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		35322C8128353DE200A494C7 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		35E4EC02283415990065C104 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
 		35E4EC042834F3E30065C104 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		35E4EC062834F4020065C104 /* Flows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flows.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		3526F7DF282BB26600CAF352 /* Nebulanav */ = {
 			isa = PBXGroup;
 			children = (
+				35322C8028353D6400A494C7 /* Authentication */,
 				35E4EC0C283509CD0065C104 /* Info.plist */,
 				3526F7E0282BB26600CAF352 /* NebulanavApp.swift */,
 				3526F7E2282BB26600CAF352 /* ContentView.swift */,
@@ -117,6 +120,7 @@
 				35E4EC062834F4020065C104 /* Flows.swift */,
 				35E4EC082834F41C0065C104 /* Routing.swift */,
 				35E4EC0A2834F45B0065C104 /* Sheets.swift */,
+				35322C8128353DE200A494C7 /* Library.swift */,
 			);
 			path = Nebulanav;
 			sourceTree = "<group>";
@@ -144,6 +148,13 @@
 				3526F7FD282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift */,
 			);
 			path = NebulanavUITests;
+			sourceTree = "<group>";
+		};
+		35322C8028353D6400A494C7 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,6 +298,7 @@
 				35E4EC092834F41C0065C104 /* Routing.swift in Sources */,
 				35E4EC072834F4020065C104 /* Flows.swift in Sources */,
 				3526F7E1282BB26600CAF352 /* NebulanavApp.swift in Sources */,
+				35322C8228353DE200A494C7 /* Library.swift in Sources */,
 				35E4EC0B2834F45B0065C104 /* Sheets.swift in Sources */,
 				35E4EC052834F3E30065C104 /* Navigation.swift in Sources */,
 			);
