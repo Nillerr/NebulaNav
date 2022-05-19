@@ -1,13 +1,8 @@
-struct Match: Equatable {
+struct PathMatch: Equatable {
     let pattern: PathPattern
     let pathname: String
     internal let pathnameBase: String
     let parameters: [String : String]
-}
-
-struct CompiledPath {
-    let matcher: RegExp
-    let parameterNames: [String]
 }
 
 func compilePath(path: String, caseSensitive: Bool = false, end: Bool = false) -> (RegExp, [String]) {
@@ -54,7 +49,7 @@ struct PathPattern: Equatable {
     }
 }
 
-func matchPath(_ pattern: PathPattern, pathname: String) -> Match? {
+func matchPath(_ pattern: PathPattern, pathname: String) -> PathMatch? {
     let (matcher, parameterNames) = compilePath(path: pattern.path, caseSensitive: pattern.caseSensitive, end: pattern.end)
     
     guard let match = pathname.firstMatch(matcher) else {
@@ -82,5 +77,5 @@ func matchPath(_ pattern: PathPattern, pathname: String) -> Match? {
         return memo
     }
     
-    return Match(pattern: pattern, pathname: matchedPathname, pathnameBase: pathnameBase, parameters: parameters)
+    return PathMatch(pattern: pattern, pathname: matchedPathname, pathnameBase: pathnameBase, parameters: parameters)
 }

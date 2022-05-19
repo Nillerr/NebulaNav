@@ -1,39 +1,136 @@
 import SwiftUI
 
-struct ReactRoute {
+class Router: ObservableObject {
+    func isActive(path: String) -> Binding<Bool> {
+        fatalError()
+    }
+}
+
+struct Location {
+    let pathname: String
+    let key: String
+}
+
+struct LocationEnvironmentKey: EnvironmentKey {
+    static var defaultValue = Location(pathname: "/", key: "default")
+}
+
+struct MatchEnvironmentKey: EnvironmentKey {
+    static var defaultValue = PathMatch(
+        pattern: PathPattern(path: "/"),
+        pathname: "/",
+        pathnameBase: "/",
+        parameters: [:]
+    )
+}
+
+struct ParentPathEnvironmentKey: EnvironmentKey {
+    static var defaultValue = "/"
+}
+
+extension EnvironmentValues {
+    var parentPath: ParentPathEnvironmentKey {
+        get { self[ParentPathEnvironmentKey.self] }
+        set { self[ParentPathEnvironmentKey.self] = newValue }
+    }
+    
+    var location: Location {
+        get { self[LocationEnvironmentKey.self] }
+        set { self[LocationEnvironmentKey.self] = newValue }
+    }
+    
+    var match: PathMatch {
+        get { self[MatchEnvironmentKey.self] }
+        set { self[MatchEnvironmentKey.self] = newValue }
+    }
+}
+
+func useMatch(from location: Location, pattern: PathPattern) -> PathMatch? {
+    matchPath(pattern, pathname: location.pathname)
+}
+
+struct Route<Destination: View, Children: View>: View {
+    @EnvironmentObject var router: Router
+    
     let path: String
-    let pathSegments: [String]
+    let destination: Destination
+    let children: Children
     
-    init(string: String) {
-        let path = string.starts(with: "/") ? string : "/\(string)"
-        
+    init(path: String, @ViewBuilder destination: () -> Destination, @ViewBuilder children: () -> Children) {
         self.path = path
-        self.pathSegments = path.split(separator: "/").map(String.init)
+        self.destination = destination()
+        self.children = children()
     }
     
-    static var root: ReactRoute { ReactRoute(string: "/") }
-}
-
-class ReactRouter: ObservableObject {
-    @Published var route: ReactRoute = .root
-    
-    func navigate(to path: String) {
-        
+    var body: some View {
+        VStack(spacing: 0) {
+            NavigationLink(isActive: router.isActive(path: path)) {
+                destination
+            }
+            
+            children
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
-struct RouteContext {
-    let router: ReactRouter
-    let match: Match
+extension NavigationLink where Label == EmptyView {
+    init(isActive: Binding<Bool>, @ViewBuilder destination: () -> Destination) {
+        self.init(isActive: isActive, destination: destination, label: { EmptyView() })
+    }
+}
+
+struct SwiftRouter<Content: View>: View {
+    @StateObject var router = Router()
+    
+    let content: Content
+    
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+    
+    var body: some View {
+        content
+            .environmentObject(router)
+    }
+}
+
+struct Routes<Root: View, Content: View>: View {
+    let root: Root
+    let content: Content
+    
+    init(@ViewBuilder root: () -> Root, @ViewBuilder content: () -> Content) {
+        self.root = root()
+        self.content = content()
+    }
+    
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 0) {
+                root
+                content
+            }
+        }
+    }
+}
+
+struct Example2View: View {
+    var body: some View {
+        Routes(root: { Text("Root") }) {
+            Route(path: "cards", destination: { Text("Cards") }) {
+                
+            }
+        }
+    }
 }
 
 struct RouteNode<Destination: View>: View {
     let path: String
-    let destination: (Match) -> Destination
+    let destination: (PathMatch) -> Destination
     
     @State var isActive: Bool = false
     
-    init(path: String, @ViewBuilder destination: @escaping (Match) -> Destination) {
+    init(path: String, @ViewBuilder destination: @escaping (PathMatch) -> Destination) {
         self.path = path
         self.destination = destination
     }

@@ -5,7 +5,7 @@ class MatchPath_Tests: XCTestCase {
     func test_matches_the_root_URL() {
         let pattern = PathPattern(path: "/")
         let match = matchPath(pattern, pathname: "/")
-        XCTAssertEqual(match, Match(
+        XCTAssertEqual(match, PathMatch(
             pattern: pattern,
             pathname: "/",
             pathnameBase: "/",
@@ -24,7 +24,7 @@ class MatchPath_WhenThePatternHasNoLeadingSlash_Tests: XCTestCase {
     func test_matches_a_pathname() {
         let pattern = PathPattern(path: "users")
         let match = matchPath(pattern, pathname: "/users")
-        XCTAssertEqual(match, Match(
+        XCTAssertEqual(match, PathMatch(
             pattern: pattern,
             pathname: "/users",
             pathnameBase: "/users",
@@ -35,7 +35,7 @@ class MatchPath_WhenThePatternHasNoLeadingSlash_Tests: XCTestCase {
     func test_matches_a_pathname_with_multiple_segments() {
         let pattern = PathPattern(path: "users/mj")
         let match = matchPath(pattern, pathname: "/users/mj")
-        XCTAssertEqual(match, Match(
+        XCTAssertEqual(match, PathMatch(
             pattern: pattern,
             pathname: "/users/mj",
             pathnameBase: "/users/mj",
@@ -46,7 +46,7 @@ class MatchPath_WhenThePatternHasNoLeadingSlash_Tests: XCTestCase {
     func test_matches_a_pathname_with_a_trailing_slash() {
         let pattern = PathPattern(path: "users")
         let match = matchPath(pattern, pathname: "/users/")
-        XCTAssertEqual(match, Match(
+        XCTAssertEqual(match, PathMatch(
             pattern: pattern,
             pathname: "/users/",
             pathnameBase: "/users",
@@ -57,7 +57,7 @@ class MatchPath_WhenThePatternHasNoLeadingSlash_Tests: XCTestCase {
     func test_matches_a_pathname_with_multiple_segments_and_a_trailing_slash() {
         let pattern = PathPattern(path: "users/mj")
         let match = matchPath(pattern, pathname: "/users/mj/")
-        XCTAssertEqual(match, Match(
+        XCTAssertEqual(match, PathMatch(
             pattern: pattern,
             pathname: "/users/mj/",
             pathnameBase: "/users/mj",
@@ -75,7 +75,7 @@ class MatchPath_WithEndFalse_Tests: XCTestCase {
         when("path has no trailing slash") {
             let pattern = PathPattern(path: "/users", end: false)
             let match = matchPath(pattern, pathname: "/users")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users",
                 pathnameBase: "/users",
@@ -86,7 +86,7 @@ class MatchPath_WithEndFalse_Tests: XCTestCase {
         when("path has trailing slash") {
             let pattern = PathPattern(path: "/users/", end: false)
             let match = matchPath(pattern, pathname: "/users")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users",
                 pathnameBase: "/users",
@@ -99,7 +99,7 @@ class MatchPath_WithEndFalse_Tests: XCTestCase {
         when("path has no trailing slash") {
             let pattern = PathPattern(path: "/users", end: false)
             let match = matchPath(pattern, pathname: "/users/")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users",
                 pathnameBase: "/users",
@@ -110,7 +110,7 @@ class MatchPath_WithEndFalse_Tests: XCTestCase {
         when("path has trailing slash") {
             let pattern = PathPattern(path: "/users/", end: false)
             let match = matchPath(pattern, pathname: "/users/")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users",
                 pathnameBase: "/users",
@@ -123,7 +123,7 @@ class MatchPath_WithEndFalse_Tests: XCTestCase {
         when("path has no trailing slash") {
             let pattern = PathPattern(path: "/users", end: false)
             let match = matchPath(pattern, pathname: "/users/mj")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users",
                 pathnameBase: "/users",
@@ -134,7 +134,7 @@ class MatchPath_WithEndFalse_Tests: XCTestCase {
         when("path has trailing slash") {
             let pattern = PathPattern(path: "/users/", end: false)
             let match = matchPath(pattern, pathname: "/users/mj")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users",
                 pathnameBase: "/users",
@@ -147,7 +147,7 @@ class MatchPath_WithEndFalse_Tests: XCTestCase {
         when("path has no trailing slash") {
             let pattern = PathPattern(path: "/users", end: false)
             let match = matchPath(pattern, pathname: "/users/mj/")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users",
                 pathnameBase: "/users",
@@ -158,7 +158,7 @@ class MatchPath_WithEndFalse_Tests: XCTestCase {
         when("path has trailing slash") {
             let pattern = PathPattern(path: "/users/", end: false)
             let match = matchPath(pattern, pathname: "/users/mj/")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users",
                 pathnameBase: "/users",
@@ -192,7 +192,7 @@ class MatchPath_WithEndFalse_AndARootPattern_Tests: XCTestCase {
     func test_matches_a_pathname() {
         let pattern = PathPattern(path: "/", end: false)
         let match = matchPath(pattern, pathname: "/users")
-        XCTAssertEqual(match, Match(
+        XCTAssertEqual(match, PathMatch(
             pattern: pattern,
             pathname: "/",
             pathnameBase: "/",
@@ -203,7 +203,7 @@ class MatchPath_WithEndFalse_AndARootPattern_Tests: XCTestCase {
     func test_matches_a_pathname_with_multiple_segments() {
         let pattern = PathPattern(path: "/", end: false)
         let match = matchPath(pattern, pathname: "/users/mj")
-        XCTAssertEqual(match, Match(
+        XCTAssertEqual(match, PathMatch(
             pattern: pattern,
             pathname: "/",
             pathnameBase: "/",
@@ -214,7 +214,7 @@ class MatchPath_WithEndFalse_AndARootPattern_Tests: XCTestCase {
     func test_matches_a_pathname_with_a_trailing_slash() {
         let pattern = PathPattern(path: "/", end: false)
         let match = matchPath(pattern, pathname: "/users/")
-        XCTAssertEqual(match, Match(
+        XCTAssertEqual(match, PathMatch(
             pattern: pattern,
             pathname: "/",
             pathnameBase: "/",
@@ -225,7 +225,7 @@ class MatchPath_WithEndFalse_AndARootPattern_Tests: XCTestCase {
     func test_matches_a_pathname_with_multiple_segments_and_a_trailing_slash() {
         let pattern = PathPattern(path: "/", end: false)
         let match = matchPath(pattern, pathname: "/users/mj/")
-        XCTAssertEqual(match, Match(
+        XCTAssertEqual(match, PathMatch(
             pattern: pattern,
             pathname: "/",
             pathnameBase: "/",
@@ -236,7 +236,7 @@ class MatchPath_WithEndFalse_AndARootPattern_Tests: XCTestCase {
     func test_is_not_case_sensitive_by_default() {
         let pattern = PathPattern(path: "/SystemDashboard")
         let match = matchPath(pattern, pathname: "/systemdashboard")
-        XCTAssertEqual(match, Match(
+        XCTAssertEqual(match, PathMatch(
             pattern: pattern,
             pathname: "/systemdashboard",
             pathnameBase: "/systemdashboard",
@@ -247,7 +247,7 @@ class MatchPath_WithEndFalse_AndARootPattern_Tests: XCTestCase {
     func test_matches_a_case_sensitive_pathname() {
         let pattern = PathPattern(path: "/SystemDashboard", caseSensitive: true)
         let match = matchPath(pattern, pathname: "/SystemDashboard")
-        XCTAssertEqual(match, Match(
+        XCTAssertEqual(match, PathMatch(
             pattern: pattern,
             pathname: "/SystemDashboard",
             pathnameBase: "/SystemDashboard",
@@ -267,7 +267,7 @@ class MatchPath_WithEndFalse_AndARootPattern_WhenThePatternHasATrailingSlashStar
         when("pathname is jpg file") {
             let pattern = PathPattern(path: "/files/*")
             let match = matchPath(pattern, pathname: "/files/mj.jpg")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/files/mj.jpg",
                 pathnameBase: "/files",
@@ -278,7 +278,7 @@ class MatchPath_WithEndFalse_AndARootPattern_WhenThePatternHasATrailingSlashStar
         when("pathname has trailing slash") {
             let pattern = PathPattern(path: "/files/*")
             let match = matchPath(pattern, pathname: "/files/")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/files/",
                 pathnameBase: "/files",
@@ -289,7 +289,7 @@ class MatchPath_WithEndFalse_AndARootPattern_WhenThePatternHasATrailingSlashStar
         when("pathname has no trailing slash") {
             let pattern = PathPattern(path: "/files/*")
             let match = matchPath(pattern, pathname: "/files")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/files",
                 pathnameBase: "/files",
@@ -304,7 +304,7 @@ class MatchPath_Star_Tests: XCTestCase {
         when("pattern is *") {
             let pattern = PathPattern(path: "*")
             let match = matchPath(pattern, pathname: "/")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/",
                 pathnameBase: "/",
@@ -315,7 +315,7 @@ class MatchPath_Star_Tests: XCTestCase {
         when("pattern is /*") {
             let pattern = PathPattern(path: "/*")
             let match = matchPath(pattern, pathname: "/")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/",
                 pathnameBase: "/",
@@ -328,7 +328,7 @@ class MatchPath_Star_Tests: XCTestCase {
         when("pattern is *") {
             let pattern = PathPattern(path: "*")
             let match = matchPath(pattern, pathname: "/users")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users",
                 pathnameBase: "/",
@@ -339,7 +339,7 @@ class MatchPath_Star_Tests: XCTestCase {
         when("pattern is /*") {
             let pattern = PathPattern(path: "/*")
             let match = matchPath(pattern, pathname: "/users")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users",
                 pathnameBase: "/",
@@ -352,7 +352,7 @@ class MatchPath_Star_Tests: XCTestCase {
         when("pattern is *") {
             let pattern = PathPattern(path: "*")
             let match = matchPath(pattern, pathname: "/users/")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users/",
                 pathnameBase: "/",
@@ -363,7 +363,7 @@ class MatchPath_Star_Tests: XCTestCase {
         when("pattern is /*") {
             let pattern = PathPattern(path: "/*")
             let match = matchPath(pattern, pathname: "/users/")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users/",
                 pathnameBase: "/",
@@ -376,7 +376,7 @@ class MatchPath_Star_Tests: XCTestCase {
         when("pattern is *") {
             let pattern = PathPattern(path: "*")
             let match = matchPath(pattern, pathname: "/users/mj")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users/mj",
                 pathnameBase: "/",
@@ -387,7 +387,7 @@ class MatchPath_Star_Tests: XCTestCase {
         when("pattern is /*") {
             let pattern = PathPattern(path: "/*")
             let match = matchPath(pattern, pathname: "/users/mj")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users/mj",
                 pathnameBase: "/",
@@ -400,7 +400,7 @@ class MatchPath_Star_Tests: XCTestCase {
         when("pattern is *") {
             let pattern = PathPattern(path: "*")
             let match = matchPath(pattern, pathname: "/users/mj/")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users/mj/",
                 pathnameBase: "/",
@@ -411,7 +411,7 @@ class MatchPath_Star_Tests: XCTestCase {
         when("pattern is /*") {
             let pattern = PathPattern(path: "/*")
             let match = matchPath(pattern, pathname: "/users/mj/")
-            XCTAssertEqual(match, Match(
+            XCTAssertEqual(match, PathMatch(
                 pattern: pattern,
                 pathname: "/users/mj/",
                 pathnameBase: "/",
