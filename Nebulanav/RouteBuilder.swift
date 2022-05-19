@@ -1,200 +1,229 @@
 import SwiftUI
 
-class Router: ObservableObject {
-    func isActive(path: String) -> Binding<Bool> {
-        fatalError()
+protocol NavigableDestination {
+    var path: [Self] { get }
+}
+
+enum Destination: View, NavigableDestination {
+    case card(cardId: String)
+    case cardTransaction(cardId: String, transactionId: String)
+    
+    case account
+    case profile
+    
+    case terminatedCards
+    case terminatedCard(cardId: String)
+    case terminatedCardTransaction(cardId: String, transactionId: String)
+    
+    var path: [Destination] {
+        switch self {
+        case .card(let cardId):
+            return [.card(cardId: cardId)]
+        case .cardTransaction(let cardId, let cardTransaction):
+            return [.card(cardId: cardId), .cardTransaction(cardId: cardId, transactionId: cardTransaction)]
+            
+        case .account:
+            return [.account]
+        case .profile:
+            return [.account, .profile]
+        
+        case .terminatedCards:
+            return [.terminatedCards]
+        case .terminatedCard(let cardId):
+            return [.terminatedCards, .terminatedCard(cardId: cardId)]
+        case .terminatedCardTransaction(let cardId, let transactionId):
+            return [.terminatedCards, .terminatedCard(cardId: cardId), .terminatedCardTransaction(cardId: cardId, transactionId: transactionId)]
+        }
+    }
+    
+    var body: some View {
+        switch self {
+        case .card(cardId: let cardId):
+            CardDetailsNebulaScreen(id: cardId)
+        case .cardTransaction(cardId: let cardId, transactionId: let transactionId):
+            TransactionNebulaScreen(id: transactionId)
+        case .account:
+            Text("Account")
+        case .profile:
+            Text("Profile")
+        case .terminatedCards:
+            Text("Terminated Cards")
+        case .terminatedCard(cardId: let cardId):
+            Text("Terminated Card: \(cardId)")
+        case .terminatedCardTransaction(cardId: let cardId, transactionId: let transactionId):
+            Text("Terminated Card Transaction: \(cardId), \(transactionId)")
+        }
     }
 }
 
-struct Location {
-    let pathname: String
-    let key: String
-}
-
-struct LocationEnvironmentKey: EnvironmentKey {
-    static var defaultValue = Location(pathname: "/", key: "default")
-}
-
-struct MatchEnvironmentKey: EnvironmentKey {
-    static var defaultValue = PathMatch(
-        pattern: PathPattern(path: "/"),
-        pathname: "/",
-        pathnameBase: "/",
-        parameters: [:]
-    )
-}
-
-struct ParentPathEnvironmentKey: EnvironmentKey {
-    static var defaultValue = "/"
-}
-
-extension EnvironmentValues {
-    var parentPath: ParentPathEnvironmentKey {
-        get { self[ParentPathEnvironmentKey.self] }
-        set { self[ParentPathEnvironmentKey.self] = newValue }
-    }
+class Router<Destination: NavigableDestination>: ObservableObject {
+    @Published var destination: Destination? = nil
     
-    var location: Location {
-        get { self[LocationEnvironmentKey.self] }
-        set { self[LocationEnvironmentKey.self] = newValue }
-    }
-    
-    var match: PathMatch {
-        get { self[MatchEnvironmentKey.self] }
-        set { self[MatchEnvironmentKey.self] = newValue }
+    func navigate(to destination: Destination?) {
+        guard let destination = destination else {
+            self.destination = nil
+            return
+        }
+
+        let currentPath = self.destination?.path ?? []
+        let currentDepth = currentPath.count
+        
+        let nextPath = destination.path
+        let nextDepth = nextPath.count
+        
+        (0..<(nextDepth - currentDepth))
+            .forEach { index in
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(index * 550)) {
+                    self.destination = nextPath[(index.advanced(by: currentDepth))]
+                }
+            }
     }
 }
 
-func useMatch(from location: Location, pattern: PathPattern) -> PathMatch? {
-    matchPath(pattern, pathname: location.pathname)
+struct Routes<Root: View, Destination: View & NavigableDestination>: View {
+    @ObservedObject var router: Router<Destination>
+    
+    @ViewBuilder let root: () -> Root
+    
+    var isChildActive: Binding<Bool> {
+        Binding(
+            get: { router.destination != nil },
+            set: { newValue in
+                if !newValue && router.destination != nil {
+                    router.destination = nil
+                }
+            }
+        )
+    }
+    
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 0) {
+                root()
+                    .environmentObject(router)
+                
+                NavigationLink(isActive: isChildActive) {
+                    if let path = pathBinding.wrappedValue, let child = path.first {
+                        Route(path: pathBinding, content: child, children: Array(path.dropFirst()))
+                            .environmentObject(router)
+                    }
+                } label: { EmptyView() }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+    
+    var pathBinding: Binding<[Destination]> {
+        Binding(
+            get: { router.destination?.path ?? [] },
+            set: { router.destination = $0.last }
+        )
+    }
 }
 
-struct Route<Destination: View, Children: View>: View {
-    @EnvironmentObject var router: Router
+struct Route<Destination: View & NavigableDestination>: View {
+    @EnvironmentObject var router: Router<Destination>
     
-    let path: String
-    let destination: Destination
-    let children: Children
+    @Binding var path: [Destination]
     
-    init(path: String, @ViewBuilder destination: () -> Destination, @ViewBuilder children: () -> Children) {
-        self.path = path
-        self.destination = destination()
-        self.children = children()
+    let content: Destination
+    let children: [Destination]
+    
+    var isChildActive: Binding<Bool> {
+        Binding(
+            get: { !children.isEmpty },
+            set: { newValue in
+                if let _ = children.first, !newValue {
+                    path = content.path
+                }
+            }
+        )
     }
     
     var body: some View {
         VStack(spacing: 0) {
-            NavigationLink(isActive: router.isActive(path: path)) {
-                destination
-            }
+            content
+                .environmentObject(router)
             
-            children
+            NavigationLink(isActive: isChildActive) {
+                if let child = children.first {
+                    Route(path: $path, content: child, children: Array(children.dropFirst()))
+                        .environmentObject(router)
+                }
+            } label: { EmptyView() }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
-extension NavigationLink where Label == EmptyView {
-    init(isActive: Binding<Bool>, @ViewBuilder destination: () -> Destination) {
-        self.init(isActive: isActive, destination: destination, label: { EmptyView() })
-    }
-}
+typealias NebulaRouter = Router<Destination>
 
-struct SwiftRouter<Content: View>: View {
-    @StateObject var router = Router()
+struct HomeNebulaScreen: View {
+    @EnvironmentObject var router: NebulaRouter
     
-    let content: Content
-    
-    init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-    }
+    @State var session: Session?
     
     var body: some View {
-        content
-            .environmentObject(router)
-    }
-}
-
-struct Routes<Root: View, Content: View>: View {
-    let root: Root
-    let content: Content
-    
-    init(@ViewBuilder root: () -> Root, @ViewBuilder content: () -> Content) {
-        self.root = root()
-        self.content = content()
-    }
-    
-    var body: some View {
-        NavigationView {
-            VStack(spacing: 0) {
-                root
-                content
-            }
+        if let session = session {
+            HomeView(
+                session: session,
+                signOut: { self.session = nil },
+                selectTransaction: { card, trx in
+                    router.navigate(to: .cardTransaction(cardId: card.id, transactionId: trx.id))
+                }
+            )
+        } else {
+            LoginView(signedIn: { result in
+                switch result {
+                case .session(let session):
+                    self.session = session
+                default:
+                    break
+                }
+            })
         }
     }
 }
 
-struct Example2View: View {
+struct CardDetailsNebulaScreen: View {
+    @EnvironmentObject var router: NebulaRouter
+    
+    let id: String
+    
     var body: some View {
-        Routes(root: { Text("Root") }) {
-            Route(path: "cards", destination: { Text("Cards") }) {
-                
-            }
+        CardDetailsView(card: Card(id: id, number: "card-\(id)")) { trx in
+            router.navigate(to: .cardTransaction(cardId: id, transactionId: trx.id))
         }
     }
 }
 
-struct RouteNode<Destination: View>: View {
-    let path: String
-    let destination: (PathMatch) -> Destination
+struct TransactionNebulaScreen: View {
+    @EnvironmentObject var router: NebulaRouter
     
-    @State var isActive: Bool = false
-    
-    init(path: String, @ViewBuilder destination: @escaping (PathMatch) -> Destination) {
-        self.path = path
-        self.destination = destination
-    }
+    let id: String
     
     var body: some View {
-        NavigationLink(isActive: $isActive) {
-            VStack(spacing: 0) {
-                EmptyView()
-//                destination(Match(path: "", parameters: [:]))
+        TransactionDetailsView(
+            transaction: CardTransaction(id: id, merchant: "trx-\(id)"),
+            root: {
+                router.navigate(to: nil)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        } label: { EmptyView() }
-    }
-}
-
-struct RouteTree<Content: View>: View {
-    let content: Content
-    
-    init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-    }
-    
-    var body: some View {
-        NavigationView {
-            VStack(spacing: 0) {
-                content
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
+        )
     }
 }
 
 struct UsageView: View {
+    @StateObject var router = NebulaRouter()
+    
     var body: some View {
-        RouteTree {
-            Text("Home")
-            
-            RouteNode(path: "cards/:cardId") { card in
-                Text("Card")
-                
-                RouteNode(path: "transactions/:transactionId") { transaction in
-                    Text("Transaction")
-                }
-            }
-            
-            RouteNode(path: "account") { account in
-                Text("Account")
-                
-                RouteNode(path: "terminated-cards") { terminatedCards in
-                    Text("Terminated Cards")
-                    
-                    RouteNode(path: ":cardId") { terminatedCard in
-                        Text("Terminated Card")
-                        
-                        RouteNode(path: "tranasctions/:transactionId") { transaction in
-                            Text("Transactions")
-                        }
-                    }
-                }
-                
-                RouteNode(path: "profile") { profile in
-                    Text("Profile")
-                }
-            }
+        Routes(router: router) {
+            HomeNebulaScreen()
         }
+    }
+}
+
+struct UsageView_Previews: PreviewProvider {
+    static var previews: some View {
+        UsageView()
     }
 }

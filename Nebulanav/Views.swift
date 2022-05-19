@@ -125,7 +125,7 @@ struct TerminatedCardDetailsView: View {
     }
 }
 
-struct HomeView: View {
+struct HomeScreen: View {
     @EnvironmentObject var router: ApplicationRouter
     
     let session: Session
@@ -133,37 +133,73 @@ struct HomeView: View {
     let signOut: () -> Void
     
     var body: some View {
-        VStack(spacing: 0) {
-            Text("Home")
-                .padding()
-            
-            Button("Request Card") {
+        HomeView(
+            session: session,
+            signOut: signOut,
+            requestCard: {
                 router.presentation = .fullScreenCover(
                     .requestCard {
                         router.presentation = nil
                         print("Card Request submitted")
                     }
                 )
+            },
+            selectCard: {
+                router.navigate(to: .cardDetails($0))
+            },
+            selectTransaction: {
+                router.navigate(to: .transactionDetails($0, $1))
+            },
+            selectTerminatedTransaction: {
+                router.navigate(to: .terminatedCardTransactionDetails($0, $1))
+            },
+            selectAccount: {
+                router.navigate(to: .account)
+            }
+        )
+    }
+}
+
+struct HomeView: View {
+    @EnvironmentObject var router: ApplicationRouter
+    
+    let session: Session
+    
+    let signOut: () -> Void
+    
+    var requestCard: () -> Void = { }
+    var selectCard: (Card) -> Void = { _ in }
+    var selectTransaction: (Card, CardTransaction) -> Void = { _, _ in }
+    var selectTerminatedTransaction: (Card, CardTransaction) -> Void = { _, _ in }
+    var selectAccount: () -> Void = { }
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            Text("Home")
+                .padding()
+            
+            Button("Request Card") {
+                requestCard()
             }
             .padding()
             
             Button("Card") {
-                router.navigate(to: .cardDetails(Card(id: "card-1", number: "1234 5678")))
+                selectCard(Card(id: "card-1", number: "1234 5678"))
             }
             .padding()
             
             Button("Transaction") {
-                router.navigate(to: .transactionDetails(Card(id: "card-1", number: "1234 5678"), CardTransaction(id: UUID().uuidString, merchant: "IKEA ODENSE")))
+                selectTransaction(Card(id: "card-1", number: "1234 5678"), CardTransaction(id: UUID().uuidString, merchant: "IKEA ODENSE"))
             }
             .padding()
             
             Button("Terminated Card Transaction (Deep)") {
-                router.navigate(to: .terminatedCardTransactionDetails(Card(id: "terminated-card-1", number: "0000 1111"), CardTransaction(id: UUID().uuidString, merchant: "TERM")))
+                selectTerminatedTransaction(Card(id: "terminated-card-1", number: "0000 1111"), CardTransaction(id: UUID().uuidString, merchant: "TERM"))
             }
             .padding()
             
             Button("Account") {
-                router.navigate(to: .account)
+                selectAccount()
             }
             .padding()
         }
@@ -184,10 +220,56 @@ extension UINavigationController: UIGestureRecognizerDelegate {
     }
 }
 
-struct TransactionDetailsView: View {
+struct TransactionDetailsScreen: View {
     @EnvironmentObject var router: ApplicationRouter
     
     let transaction: CardTransaction
+    
+    var body: some View {
+        TransactionDetailsView(
+            transaction: transaction,
+            root: {
+                router.navigate(to: nil)
+            },
+            other: {
+                router.navigate(to: .transactionDetails($0, $1))
+            },
+            comment: {
+                router.presentation = .fullScreenCover(
+                    .comment {
+                        router.presentation = nil
+                        print("Added comment: \($0)")
+                    }
+                )
+            },
+            addAttachment: {
+                router.presentation = .fullScreenCover(
+                    .addAttachment {
+                        router.presentation = nil
+                        print("Added attachment")
+                    }
+                )
+            },
+            viewAttachment: {
+                router.presentation = .fullScreenCover(
+                    .attachment {
+                        router.presentation = nil
+                        print("Deleted attachment")
+                    }
+                )
+            }
+        )
+    }
+}
+
+struct TransactionDetailsView: View {
+    let transaction: CardTransaction
+    
+    var root: () -> Void = { }
+    var other: (Card, CardTransaction) -> Void = { _, _ in }
+    var comment: () -> Void = { }
+    var addAttachment: () -> Void = { }
+    var viewAttachment: () -> Void = { }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -198,42 +280,27 @@ struct TransactionDetailsView: View {
                 .padding()
             
             Button("Root") {
-                router.navigate(to: nil)
+                root()
             }
             .padding()
             
             Button("Other Transaction") {
-                router.navigate(to: .transactionDetails(Card(id: "abc-12", number: "1234 abc"), CardTransaction(id: UUID().uuidString, merchant: "ODENSE GOKART HAL")))
+                other(Card(id: "abc-12", number: "1234 abc"), CardTransaction(id: UUID().uuidString, merchant: "ODENSE GOKART HAL"))
             }
             .padding()
             
             Button("Comment") {
-                router.presentation = .fullScreenCover(
-                    .comment {
-                        router.presentation = nil
-                        print("Added comment: \($0)")
-                    }
-                )
+                comment()
             }
             .padding()
             
             Button("Add attachment") {
-                router.presentation = .fullScreenCover(
-                    .addAttachment {
-                        router.presentation = nil
-                        print("Added attachment")
-                    }
-                )
+                addAttachment()
             }
             .padding()
             
             Button("View attachment") {
-                router.presentation = .fullScreenCover(
-                    .attachment {
-                        router.presentation = nil
-                        print("Deleted attachment")
-                    }
-                )
+                viewAttachment()
             }
             .padding()
         }
@@ -257,7 +324,6 @@ struct CardDetailsView: View {
             .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationBarHidden(true)
     }
 }
 
