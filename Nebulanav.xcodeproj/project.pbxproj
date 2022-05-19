@@ -14,7 +14,9 @@
 		3526F7F2282BB26700CAF352 /* NebulanavTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7F1282BB26700CAF352 /* NebulanavTests.swift */; };
 		3526F7FC282BB26700CAF352 /* NebulanavUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7FB282BB26700CAF352 /* NebulanavUITests.swift */; };
 		3526F7FE282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7FD282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift */; };
+		3527DE3D283650FC00737C2C /* MatchPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3527DE3C283650FC00737C2C /* MatchPathTests.swift */; };
 		35322C8228353DE200A494C7 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35322C8128353DE200A494C7 /* Library.swift */; };
+		35322C8428360EA400A494C7 /* RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35322C8328360EA400A494C7 /* RouteBuilder.swift */; };
 		35E4EC01283415820065C104 /* CardlayUI in Frameworks */ = {isa = PBXBuildFile; productRef = 35E4EC00283415820065C104 /* CardlayUI */; };
 		35E4EC03283415990065C104 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC02283415990065C104 /* Views.swift */; };
 		35E4EC052834F3E30065C104 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC042834F3E30065C104 /* Navigation.swift */; };
@@ -51,7 +53,9 @@
 		3526F7F7282BB26700CAF352 /* NebulanavUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NebulanavUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3526F7FB282BB26700CAF352 /* NebulanavUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulanavUITests.swift; sourceTree = "<group>"; };
 		3526F7FD282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulanavUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3527DE3C283650FC00737C2C /* MatchPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPathTests.swift; sourceTree = "<group>"; };
 		35322C8128353DE200A494C7 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		35322C8328360EA400A494C7 /* RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBuilder.swift; sourceTree = "<group>"; };
 		35E4EC02283415990065C104 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
 		35E4EC042834F3E30065C104 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		35E4EC062834F4020065C104 /* Flows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flows.swift; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 				35E4EC082834F41C0065C104 /* Routing.swift */,
 				35E4EC0A2834F45B0065C104 /* Sheets.swift */,
 				35322C8128353DE200A494C7 /* Library.swift */,
+				35322C8328360EA400A494C7 /* RouteBuilder.swift */,
 			);
 			path = Nebulanav;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				3526F7F1282BB26700CAF352 /* NebulanavTests.swift */,
+				3527DE3C283650FC00737C2C /* MatchPathTests.swift */,
 			);
 			path = NebulanavTests;
 			sourceTree = "<group>";
@@ -300,6 +306,7 @@
 				3526F7E1282BB26600CAF352 /* NebulanavApp.swift in Sources */,
 				35322C8228353DE200A494C7 /* Library.swift in Sources */,
 				35E4EC0B2834F45B0065C104 /* Sheets.swift in Sources */,
+				35322C8428360EA400A494C7 /* RouteBuilder.swift in Sources */,
 				35E4EC052834F3E30065C104 /* Navigation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3527DE3D283650FC00737C2C /* MatchPathTests.swift in Sources */,
 				3526F7F2282BB26700CAF352 /* NebulanavTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
