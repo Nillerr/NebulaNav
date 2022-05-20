@@ -4,7 +4,7 @@ class ApplicationRouter: ObservableObject, LevelRouter {
     // MARK: Sheets
     @Published var presentation: Presentation<Sheet>? {
         didSet {
-            print("didSet presentation = \(presentation?.sheet?.id ?? presentation?.fullScreenCover?.id ?? "<nil>")")
+            print("didSet presentation = \(presentation?.presentable.id ?? "<nil>")")
         }
     }
     
@@ -285,6 +285,16 @@ class LevelFourRouter: ObservableObject {
     
     init(screen: Screen) {
         self.screen = screen
+    }
+}
+
+extension Presentation {
+    static func sheet(_ presentable: Presentable) -> Self {
+        .init(presentable: presentable, style: .sheet)
+    }
+    
+    static func fullScreenCover(_ presentable: Presentable) -> Self {
+        .init(presentable: presentable, style: .fullScreenCover)
     }
 }
 

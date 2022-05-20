@@ -4,7 +4,7 @@ import SwiftUI
 struct NebulanavApp: App {
     var body: some Scene {
         WindowGroup {
-            ApplicationFlow()
+            UsageView()
         }
     }
 }

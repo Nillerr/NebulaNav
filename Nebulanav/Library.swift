@@ -17,41 +17,20 @@ func deferredNav<T>(detail: T, completion: @escaping (T) -> Void) {
     }
 }
 
-enum Presentation<Sheet> {
-    case sheet(Sheet)
-    case fullScreenCover(Sheet)
-    
-    var sheet: Sheet? {
-        if case .sheet(let sheet) = self {
-            return sheet
-        }
-        
-        return nil
-    }
-    
-    var fullScreenCover: Sheet? {
-        if case .fullScreenCover(let sheet) = self {
-            return sheet
-        }
-        
-        return nil
-    }
-}
-
-struct BetterSheetHost<Router, Sheet, Destination: View>: View {
+struct BetterSheetHost<Router, Presentable, Destination: View>: View {
     let router: Router
     
-    let presentation: ReferenceWritableKeyPath<Router, Presentation<Sheet>?>
-    let publisher: KeyPath<Router, Published<Presentation<Sheet>?>.Publisher>
+    let presentation: ReferenceWritableKeyPath<Router, Presentation<Presentable>?>
+    let publisher: KeyPath<Router, Published<Presentation<Presentable>?>.Publisher>
     
-    var onDismiss: (Sheet) -> Void = { _ in }
+    var onDismiss: (Presentable) -> Void = { _ in }
     
-    @ViewBuilder let destination: (Sheet) -> Destination
+    @ViewBuilder let destination: (Presentable) -> Destination
     
-    @State var nextPresentation: Presentation<Sheet>?
+    @State var nextPresentation: Presentation<Presentable>?
     
-    @State var currentSheet: Sheet?
-    @State var currentFullScreenCover: Sheet?
+    @State var currentSheet: Presentable?
+    @State var currentFullScreenCover: Presentable?
     
     var body: some View {
         Group {
@@ -72,21 +51,12 @@ struct BetterSheetHost<Router, Sheet, Destination: View>: View {
         .onReceive(router[keyPath: publisher]) { presentation in
             if let presentation = presentation {
                 if currentSheet != nil || currentFullScreenCover != nil {
-                    nextPresentation = presentation
-                    
-                    currentSheet = nil
-                    currentFullScreenCover = nil
+                    enqueue(presentation)
                 } else {
-                    nextPresentation = nil
-                    
-                    currentSheet = presentation.sheet
-                    currentFullScreenCover = presentation.fullScreenCover
+                    present(presentation)
                 }
             } else {
-                nextPresentation = nil
-                
-                currentSheet = nil
-                currentFullScreenCover = nil
+                clear()
             }
         }
     }
@@ -96,13 +66,31 @@ struct BetterSheetHost<Router, Sheet, Destination: View>: View {
 //            onDismiss(previous)
 //        }
                 
-        if let nextPresentation = self.nextPresentation {
-            self.nextPresentation = nil
-            
-            self.currentSheet = nextPresentation.sheet
-            self.currentFullScreenCover = nextPresentation.fullScreenCover
+        if let presentation = self.nextPresentation {
+            present(presentation)
         } else if router[keyPath: presentation] != nil {
             router[keyPath: presentation] = nil
         }
+    }
+    
+    private func enqueue(_ presentation: Presentation<Presentable>) {
+        nextPresentation = presentation
+        
+        currentSheet = nil
+        currentFullScreenCover = nil
+    }
+    
+    private func present(_ presentation: Presentation<Presentable>) {
+        nextPresentation = nil
+        
+        currentSheet = presentation.style == .sheet ? presentation.presentable : nil
+        currentFullScreenCover = presentation.style == .fullScreenCover ? presentation.presentable : nil
+    }
+    
+    private func clear() {
+        nextPresentation = nil
+        
+        currentSheet = nil
+        currentFullScreenCover = nil
     }
 }

@@ -40,7 +40,7 @@ struct ApplicationFlow: View {
                 RoutesView(routes: router) { screen in
                     switch screen {
                     case .login:
-                        StartView(signIn: { router.presentation = .sheet(.login) })
+                        StartView(signIn: { router.presentation = Presentation(presentable: .login, style: .sheet) })
                             .background(Color.gray.ignoresSafeArea())
                     case .home(let session):
                         HomeView(session: session, signOut: { router.signOut() })
@@ -91,11 +91,12 @@ struct ApplicationFlow: View {
             }
         case "request-card":
             whenSignedIn(presents: true) { [router] in
-                router.presentation = .sheet(
-                    .requestCard {
+                router.presentation = Presentation(
+                    presentable: .requestCard {
                         router.presentation = nil
                         print("Card Requested (from URL)")
-                    }
+                    },
+                    style: .sheet
                 )
             }
         case "login":
