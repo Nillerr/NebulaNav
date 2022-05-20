@@ -15,30 +15,6 @@ struct Session {
     let refreshToken: String
 }
 
-protocol OptionalType {
-    associatedtype Wrapped
-    
-    var wrapped: Wrapped? { get }
-    
-    static var createNil: Self { get }
-}
-
-extension Optional: OptionalType {
-    var wrapped: Wrapped? { self }
-    
-    static var createNil: Wrapped? { nil }
-}
-
-extension Binding where Value : OptionalType {
-    var isActive: Binding<Bool> {
-        Binding<Bool>(get: { wrappedValue.wrapped != nil }, set: { newValue in
-            if !newValue {
-                wrappedValue = .createNil
-            }
-        })
-    }
-}
-
 struct Card {
     let id: String
     let number: String
@@ -56,41 +32,41 @@ extension Collection {
 }
 
 struct AccountView: View {
-    @EnvironmentObject var router: ApplicationRouter
+    var profile: () -> Void = {}
+    var terminatedCards: () -> Void = {}
     
     var body: some View {
         VStack(spacing: 0) {
             Text("Account")
                 .padding()
             
-            Button("Profile") {
-                router.navigate(to: .contact)
-            }
-            .padding()
+            Button("Profile", action: profile)
+                .padding()
+            
+            Button("Terminated Cards", action: terminatedCards)
+                .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 struct ProfileView: View {
-    @EnvironmentObject var router: ApplicationRouter
+    var signOut: () -> Void = {}
     
     var body: some View {
         VStack(spacing: 0) {
             Text("Profile")
                 .padding()
             
-            Button("Sign out") {
-                router.signOut()
-            }
-            .padding()
+            Button("Sign out", action: signOut)
+                .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 struct TerminatedCardsView: View {
-    @EnvironmentObject var router: ApplicationRouter
+    var terminatedCardDetails: (CardDetailViewModel) -> Void = { _ in }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -98,7 +74,8 @@ struct TerminatedCardsView: View {
                 .padding()
             
             Button("Terminated Card Details") {
-                router.navigate(to: .terminatedCardDetails(Card(id: "terminated-card-1", number: "0000 1111")))
+//                terminatedCardDetails(Card(id: "terminated-card-1", number: "0000 1111"))
+                terminatedCardDetails(CardDetailViewModel(cardId: "terminated-card-1"))
             }
             .padding()
         }
@@ -107,9 +84,9 @@ struct TerminatedCardsView: View {
 }
 
 struct TerminatedCardDetailsView: View {
-    @EnvironmentObject var router: ApplicationRouter
+    @ObservedObject var viewModel: CardDetailViewModel
     
-    let card: Card
+    var transaction: (TransactionDetailViewModel) -> Void = { _ in }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -117,7 +94,8 @@ struct TerminatedCardDetailsView: View {
                 .padding()
             
             Button("Transaction") {
-                router.navigate(to: .terminatedCardTransactionDetails(Card(id: "terminated-card-1", number: "0000 1111"), CardTransaction(id: UUID().uuidString, merchant: "TERMINATED")))
+//                transaction(CardTransaction(id: UUID().uuidString, merchant: "TERMINATED"))
+                transaction(TransactionDetailViewModel(cardId: viewModel.cardId, transactionId: UUID().uuidString))
             }
             .padding()
         }
@@ -126,125 +104,124 @@ struct TerminatedCardDetailsView: View {
 }
 
 struct HomeView: View {
-    @EnvironmentObject var router: ApplicationRouter
-    
     let session: Session
     
-    let signOut: () -> Void
+    var requestCard: () -> Void = {}
+    var card: (CardDetailViewModel) -> Void = { _ in }
+    var cardTransaction: (CardDetailViewModel, TransactionDetailViewModel) -> Void = { _, _ in }
+    var terminatedCardTransaction: (CardDetailViewModel, TransactionDetailViewModel) -> Void = { _, _ in }
+    var account: () -> Void = {}
     
     var body: some View {
         VStack(spacing: 0) {
             Text("Home")
                 .padding()
             
-            Button("Request Card") {
-                router.presentation = .fullScreenCover(
-                    .requestCard {
-                        router.presentation = nil
-                        print("Card Request submitted")
-                    }
-                )
-            }
-            .padding()
+            Button("Request Card", action: requestCard)
+                .padding()
             
             Button("Card") {
-                router.navigate(to: .cardDetails(Card(id: "card-1", number: "1234 5678")))
+//                card(Card(id: "card-1", number: "1234 5678"))
+                card(CardDetailViewModel(cardId: "card-1"))
             }
             .padding()
             
             Button("Transaction") {
-                router.navigate(to: .transactionDetails(Card(id: "card-1", number: "1234 5678"), CardTransaction(id: UUID().uuidString, merchant: "IKEA ODENSE")))
+//                cardTransaction(
+//                    Card(id: "card-1", number: "1234 5678"),
+//                    CardTransaction(id: UUID().uuidString, merchant: "IKEA ODENSE")
+//                )
+                
+                cardTransaction(
+                    CardDetailViewModel(cardId: "card-1"),
+                    TransactionDetailViewModel(cardId: "card-1", transactionId: UUID().uuidString)
+                )
             }
             .padding()
             
             Button("Terminated Card Transaction (Deep)") {
-                router.navigate(to: .terminatedCardTransactionDetails(Card(id: "terminated-card-1", number: "0000 1111"), CardTransaction(id: UUID().uuidString, merchant: "TERM")))
+//                terminatedCardTransaction(Card(id: "terminated-card-1", number: "0000 1111"), CardTransaction(id: UUID().uuidString, merchant: "TERM"))
+                terminatedCardTransaction(
+                    CardDetailViewModel(cardId: "terminated-card-1"),
+                    TransactionDetailViewModel(cardId: "terminated-card-1", transactionId: UUID().uuidString)
+                )
             }
             .padding()
             
-            Button("Account") {
-                router.navigate(to: .account)
-            }
-            .padding()
+            Button("Account", action: account)
+                .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationBarHidden(true)
     }
 }
 
-// Enables swipe-to-dismiss when navigation bar is hidden: https://stackoverflow.com/questions/59921239/hide-navigation-bar-without-losing-swipe-back-gesture-in-swiftui
-extension UINavigationController: UIGestureRecognizerDelegate {
-    override open func viewDidLoad() {
-        super.viewDidLoad()
-        interactivePopGestureRecognizer?.delegate = self
+class CardDetailViewModel: ObservableObject {
+    @Published private(set) var cardId: String
+    
+    @Published private(set) var cardNumber: String = ""
+    
+    init(cardId: String) {
+        self.cardId = cardId
+        self.cardNumber = "card-number \(cardId)"
     }
+}
 
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return viewControllers.count > 1
+class TransactionDetailViewModel: ObservableObject {
+    @Published private(set) var cardId: String
+    @Published private(set) var transactionId: String
+    
+    @Published private(set) var merchant: String = ""
+    
+    init(cardId: String, transactionId: String) {
+        self.cardId = cardId
+        self.transactionId = transactionId
+        self.merchant = "Merchant \(transactionId)"
     }
 }
 
 struct TransactionDetailsView: View {
-    @EnvironmentObject var router: ApplicationRouter
+    @ObservedObject var viewModel: TransactionDetailViewModel
     
-    let transaction: CardTransaction
+    var root: () -> Void = {}
+    var other: (Card, CardTransaction) -> Void = { _, _ in }
+    var comment: () -> Void = {}
+    var addAttachment: () -> Void = {}
+    var viewAttachment: () -> Void = {}
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("Transaction Details (\(transaction.id))")
+            Text("Transaction Details (\(viewModel.transactionId))")
                 .padding()
             
-            Text(transaction.merchant)
+            Text(viewModel.merchant)
                 .padding()
             
-            Button("Root") {
-                router.navigate(to: nil)
-            }
-            .padding()
+            Button("Root", action: root)
+                .padding()
             
             Button("Other Transaction") {
-                router.navigate(to: .transactionDetails(Card(id: "abc-12", number: "1234 abc"), CardTransaction(id: UUID().uuidString, merchant: "ODENSE GOKART HAL")))
+                other(Card(id: "abc-12", number: "1234 abc"), CardTransaction(id: UUID().uuidString, merchant: "ODENSE GOKART HAL"))
             }
             .padding()
             
-            Button("Comment") {
-                router.presentation = .fullScreenCover(
-                    .comment {
-                        router.presentation = nil
-                        print("Added comment: \($0)")
-                    }
-                )
-            }
-            .padding()
+            Button("Comment", action: comment)
+                .padding()
             
-            Button("Add attachment") {
-                router.presentation = .fullScreenCover(
-                    .addAttachment {
-                        router.presentation = nil
-                        print("Added attachment")
-                    }
-                )
-            }
-            .padding()
+            Button("Add attachment", action: addAttachment)
+                .padding()
             
-            Button("View attachment") {
-                router.presentation = .fullScreenCover(
-                    .attachment {
-                        router.presentation = nil
-                        print("Deleted attachment")
-                    }
-                )
-            }
-            .padding()
+            Button("View attachment", action: viewAttachment)
+                .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 struct CardDetailsView: View {
-    let card: Card
+    @ObservedObject var viewModel: CardDetailViewModel
     
-    let transaction: (CardTransaction) -> Void
+    let transaction: (TransactionDetailViewModel) -> Void
     
     var body: some View {
         VStack(spacing: 0) {
@@ -252,7 +229,8 @@ struct CardDetailsView: View {
                 .padding()
             
             Button("Transaction Details") {
-                transaction(CardTransaction(id: UUID().uuidString, merchant: "IKEA ODENSE"))
+//                transaction(CardTransaction(id: UUID().uuidString, merchant: "IKEA ODENSE"))
+                transaction(TransactionDetailViewModel(cardId: viewModel.cardId, transactionId: UUID().uuidString))
             }
             .padding()
         }
@@ -364,23 +342,6 @@ struct LoginView: View {
             .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-}
-
-struct BetterNavigationLink<Value, Destination: View>: View {
-    @Binding var item: Value?
-    
-    var isDetailLink: Bool = false
-    
-    @ViewBuilder let destination: (Value) -> Destination
-    
-    var body: some View {
-        NavigationLink(isActive: $item.isActive) {
-            if let value = item {
-                destination(value)
-            }
-        } label: { EmptyView() }
-            .isDetailLink(isDetailLink)
     }
 }
 

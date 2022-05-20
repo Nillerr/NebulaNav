@@ -14,12 +14,12 @@
 		3526F7F2282BB26700CAF352 /* NebulanavTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7F1282BB26700CAF352 /* NebulanavTests.swift */; };
 		3526F7FC282BB26700CAF352 /* NebulanavUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7FB282BB26700CAF352 /* NebulanavUITests.swift */; };
 		3526F7FE282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526F7FD282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift */; };
-		35322C8228353DE200A494C7 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35322C8128353DE200A494C7 /* Library.swift */; };
+		352E1D4728376E91004F3D8B /* Detour in Frameworks */ = {isa = PBXBuildFile; productRef = 352E1D4628376E91004F3D8B /* Detour */; };
+		352E1D49283776DC004F3D8B /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352E1D48283776DC004F3D8B /* UIKit.swift */; };
+		352E1D4B28378467004F3D8B /* SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352E1D4A28378467004F3D8B /* SwiftUI.swift */; };
 		35E4EC01283415820065C104 /* CardlayUI in Frameworks */ = {isa = PBXBuildFile; productRef = 35E4EC00283415820065C104 /* CardlayUI */; };
 		35E4EC03283415990065C104 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC02283415990065C104 /* Views.swift */; };
-		35E4EC052834F3E30065C104 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC042834F3E30065C104 /* Navigation.swift */; };
 		35E4EC072834F4020065C104 /* Flows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC062834F4020065C104 /* Flows.swift */; };
-		35E4EC092834F41C0065C104 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC082834F41C0065C104 /* Routing.swift */; };
 		35E4EC0B2834F45B0065C104 /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4EC0A2834F45B0065C104 /* Sheets.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,11 +51,10 @@
 		3526F7F7282BB26700CAF352 /* NebulanavUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NebulanavUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3526F7FB282BB26700CAF352 /* NebulanavUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulanavUITests.swift; sourceTree = "<group>"; };
 		3526F7FD282BB26700CAF352 /* NebulanavUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NebulanavUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		35322C8128353DE200A494C7 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		352E1D48283776DC004F3D8B /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
+		352E1D4A28378467004F3D8B /* SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI.swift; sourceTree = "<group>"; };
 		35E4EC02283415990065C104 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
-		35E4EC042834F3E30065C104 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		35E4EC062834F4020065C104 /* Flows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flows.swift; sourceTree = "<group>"; };
-		35E4EC082834F41C0065C104 /* Routing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
 		35E4EC0A2834F45B0065C104 /* Sheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheets.swift; sourceTree = "<group>"; };
 		35E4EC0C283509CD0065C104 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35E4EC01283415820065C104 /* CardlayUI in Frameworks */,
+				352E1D4728376E91004F3D8B /* Detour in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,11 +116,10 @@
 				3526F7E4282BB26700CAF352 /* Assets.xcassets */,
 				3526F7E6282BB26700CAF352 /* Preview Content */,
 				35E4EC02283415990065C104 /* Views.swift */,
-				35E4EC042834F3E30065C104 /* Navigation.swift */,
 				35E4EC062834F4020065C104 /* Flows.swift */,
-				35E4EC082834F41C0065C104 /* Routing.swift */,
 				35E4EC0A2834F45B0065C104 /* Sheets.swift */,
-				35322C8128353DE200A494C7 /* Library.swift */,
+				352E1D48283776DC004F3D8B /* UIKit.swift */,
+				352E1D4A28378467004F3D8B /* SwiftUI.swift */,
 			);
 			path = Nebulanav;
 			sourceTree = "<group>";
@@ -175,6 +174,7 @@
 			name = Nebulanav;
 			packageProductDependencies = (
 				35E4EC00283415820065C104 /* CardlayUI */,
+				352E1D4628376E91004F3D8B /* Detour */,
 			);
 			productName = Nebulanav;
 			productReference = 3526F7DD282BB26600CAF352 /* Nebulanav.app */;
@@ -250,6 +250,7 @@
 			mainGroup = 3526F7D4282BB26600CAF352;
 			packageReferences = (
 				35E4EBFF283415820065C104 /* XCRemoteSwiftPackageReference "ios-cardlayui" */,
+				352E1D4528376E91004F3D8B /* XCRemoteSwiftPackageReference "Detour" */,
 			);
 			productRefGroup = 3526F7DE282BB26600CAF352 /* Products */;
 			projectDirPath = "";
@@ -294,13 +295,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				35E4EC03283415990065C104 /* Views.swift in Sources */,
+				352E1D4B28378467004F3D8B /* SwiftUI.swift in Sources */,
 				3526F7E3282BB26600CAF352 /* ContentView.swift in Sources */,
-				35E4EC092834F41C0065C104 /* Routing.swift in Sources */,
 				35E4EC072834F4020065C104 /* Flows.swift in Sources */,
 				3526F7E1282BB26600CAF352 /* NebulanavApp.swift in Sources */,
-				35322C8228353DE200A494C7 /* Library.swift in Sources */,
+				352E1D49283776DC004F3D8B /* UIKit.swift in Sources */,
 				35E4EC0B2834F45B0065C104 /* Sheets.swift in Sources */,
-				35E4EC052834F3E30065C104 /* Navigation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,6 +629,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		352E1D4528376E91004F3D8B /* XCRemoteSwiftPackageReference "Detour" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Nillerr/Detour";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		35E4EBFF283415820065C104 /* XCRemoteSwiftPackageReference "ios-cardlayui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/cardlay/ios-cardlayui";
@@ -640,6 +648,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		352E1D4628376E91004F3D8B /* Detour */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 352E1D4528376E91004F3D8B /* XCRemoteSwiftPackageReference "Detour" */;
+			productName = Detour;
+		};
 		35E4EC00283415820065C104 /* CardlayUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 35E4EBFF283415820065C104 /* XCRemoteSwiftPackageReference "ios-cardlayui" */;
