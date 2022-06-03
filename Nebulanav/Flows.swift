@@ -31,6 +31,8 @@ enum Destination: Routeable {
             return [.account, .terminatedCards, .terminatedCard(cardViewModel), .terminatedCardTransaction(cardViewModel, viewModel)]
         }
     }
+    
+    var style: RouteStyle { .none }
 }
 
 typealias Presenter = Detour.Presenter<Sheet>
